@@ -535,7 +535,12 @@ mark::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:.06em;bo
 .ftr__cols a{display:block;padding:5px 0;color:#FFFFFF;transition:color .3s}
 .ftr__cols a:hover{color:#fff}
 .ftr__offices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;padding-block:40px;border-top:1px solid var(--line-d);font-size:.88rem;line-height:1.5}
-.ftr__base{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-top:40px;border-top:1px solid var(--line-d);font-size:.86rem}
+.ftr__base{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:40px;border-top:1px solid var(--line-d);font-size:.86rem}
+.ftr__base a{color:inherit;transition:color .3s}
+.ftr__base a:hover{color:var(--teal)}
+.ftr__credit{color:rgba(255,255,255,.75)}
+.ftr__credit a{color:var(--teal);text-decoration:none;font-weight:500}
+.ftr__credit a:hover{color:#fff;text-decoration:underline}
 .ftr__mark{display:none}
 
 /* dock CTA */

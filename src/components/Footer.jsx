@@ -24,6 +24,12 @@ export default function Footer() {
         <div className="ftr__base">
           <i className="wm wm--ftr" aria-hidden="true" />
           <p>© 2026 Energy In Motion Ltd. All rights reserved.</p>
+          <p className="ftr__credit">
+            Designed and Developed by{' '}
+            <a href="https://www.theimpulsedigital.com/" target="_blank" rel="noopener noreferrer">
+              Impulse Digital
+            </a>
+          </p>
           <a href="mailto:powerup@energyinmotion.in">powerup@energyinmotion.in</a>
         </div>
       </div>
