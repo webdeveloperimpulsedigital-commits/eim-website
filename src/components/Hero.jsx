@@ -21,7 +21,7 @@ export default function Hero() {
           </g>
         </svg>
         <div className="hero__copy" id="heroCopy">
-          <h1 className="hero__h" id="hero-h"><span className="ln">Keep your trucks earning1</span> <span className="ln">Leave the <mark>battery</mark> to&nbsp;us.</span></h1>
+          <h1 className="hero__h" id="hero-h"><span className="ln">Keep your trucks earning</span> <span className="ln">Leave the <mark>battery</mark> to&nbsp;us.</span></h1>
           <p className="hero__sub">EIM puts 55-tonne electric tractors on India's freight routes, owns and looks after every battery, and swaps a drained pack for a full one in under 7 minutes.</p>
           <div className="hero__ctas">
             <a className="btn btn--teal" href="#assess"><span>Assess your fleet</span><svg><use href="#arrow" /></svg></a>
