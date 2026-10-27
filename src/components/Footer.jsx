@@ -1,4 +1,5 @@
 import React from 'react';
+import { url, PAGES, sectionOf } from '../paths';
 
 export default function Footer() {
   return (
@@ -9,10 +10,10 @@ export default function Footer() {
           <a className="btn btn--teal" href="#assess"><span>Assess your fleet</span><svg><use href="#arrow" /></svg></a>
         </div>
         <div className="ftr__cols">
-          <div><h4>Solutions</h4><a href="#maitryi">Maitryi model</a><a href="#ashwa">ASHWA e-tractor</a><a href="#swap">Battery swapping</a><a href="#network">Fast charging</a><a href="#proof">After-sales service</a></div>
-          <div><h4>Industries</h4><a href="#industries">Ports and container terminals</a><a href="#industries">Logistics and middle-mile</a><a href="#industries">Cement, steel and mining</a></div>
-          <div><h4>Knowledge</h4><a href="#swap-vs-charge">Guides</a><a href="#faq">FAQs</a><a href="#news">News and press</a><a href="#proof">Events</a></div>
-          <div><h4>Company</h4><a href="#backers">About EIM</a><a href="#backers">Leadership</a><a href="#backers">Shareholders and partners</a><a href="#network">Network</a><a href="#careers">Careers</a><a href="#assess">Contact</a></div>
+          <div><h4>Solutions</h4><a href={url(PAGES.maitryi)}>Maitryi model</a><a href={url(PAGES.ashwa)}>ASHWA e-tractor</a><a href={url(PAGES.swap)}>Swapping and charging</a><a href={url(PAGES.ashwa + '#service')}>After-sales service</a></div>
+          <div><h4>Industries</h4><a href={url(PAGES.ports)}>Ports and container terminals</a><a href={url('#industries')}>Logistics and middle-mile</a><a href={url('#industries')}>Cement, steel and mining</a></div>
+          <div><h4>Company</h4><a href={url(PAGES.about)}>About EIM</a><a href={url('#backers')}>Leadership</a><a href={url('#backers')}>Shareholders and partners</a><a href={url(PAGES.newsroom)}>Newsroom</a></div>
+          <div><h4>Get in touch</h4><a href={sectionOf(PAGES.swap, '#network')}>Network</a><a href={url('#careers')}>Careers</a><a href="#assess">Contact</a><a href="#assess">Assess your fleet</a></div>
         </div>
         <div className="ftr__offices">
           <div><h4>Mumbai (HQ)</h4><p>1A, 1st floor, Kohinoor Square, Dadar (W), Mumbai 400028</p></div>

@@ -1,12 +1,17 @@
 import React from 'react';
 
-export default function FleetAssessmentForm() {
+// Inner pages pass their own heading and lede, and pre-select the intent they are about.
+export default function FleetAssessmentForm({
+  title = 'What do you want to electrify?',
+  lede = 'Pick one, leave a number, and our fleet team will come back with a plan built around your routes.',
+  intent = 'fleet',
+}) {
   return (
     <section className="assess sec sec--dark" id="assess" aria-labelledby="as-h">
       <div className="wrap assess__grid">
         <div className="assess__copy">
-          <h2 className="h2" id="as-h">What do you want to electrify?</h2>
-          <p className="lede">Pick one, leave a number, and our fleet team will come back with a plan built around your routes.</p>
+          <h2 className="h2" id="as-h">{title}</h2>
+          <p className="lede">{lede}</p>
           <ul className="assess__direct">
             <li><span>Email</span><a href="mailto:powerup@energyinmotion.in">powerup@energyinmotion.in</a></li>
             <li><span>Head office</span>1A, 1st floor, Kohinoor Square, Dadar (W), Mumbai 400028</li>
@@ -16,9 +21,9 @@ export default function FleetAssessmentForm() {
         <form className="aform" id="aform" noValidate>
           <fieldset className="aform__intent">
             <legend>I want to talk about</legend>
-            <label className="intent"><input type="radio" name="intent" id="i-fleet" value="fleet" defaultChecked /><span><b>My fleet</b>Electrifying trucks I run today</span></label>
-            <label className="intent"><input type="radio" name="intent" id="i-site" value="site" /><span><b>A route or site</b>A swap or charging station where we operate</span></label>
-            <label className="intent"><input type="radio" name="intent" id="i-mai" value="maitryi" /><span><b>The Maitryi model</b>How owning the truck, not the battery, works</span></label>
+            <label className="intent"><input type="radio" name="intent" id="i-fleet" value="fleet" defaultChecked={intent === 'fleet'} /><span><b>My fleet</b>Electrifying trucks I run today</span></label>
+            <label className="intent"><input type="radio" name="intent" id="i-site" value="site" defaultChecked={intent === 'site'} /><span><b>A route or site</b>A swap or charging station where we operate</span></label>
+            <label className="intent"><input type="radio" name="intent" id="i-mai" value="maitryi" defaultChecked={intent === 'maitryi'} /><span><b>The Maitryi model</b>How owning the truck, not the battery, works</span></label>
           </fieldset>
           <div className="aform__fields">
             <div className="f"><label htmlFor="f-name">Your name</label><input id="f-name" name="name" autoComplete="name" required /></div>

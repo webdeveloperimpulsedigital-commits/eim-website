@@ -200,7 +200,7 @@
   }
 
   /* ---------- relief cards: the old problem is struck through as each card arrives ---------- */
-  if (hasG && !reduce) {
+  if (hasG && !reduce && $('.relief__cards')) {
     ScrollTrigger.create({ trigger: '.relief__cards', start: 'top 75%', once: true, onEnter: function () {
       gsap.fromTo('.rc', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .8, ease: 'power3.out', stagger: .08, clearProps: 'opacity,transform' });
     } });
@@ -391,14 +391,14 @@
   })();
 
   /* ---------- timeline: horizontal on desktop ---------- */
-  if (hasG && !reduce) ScrollTrigger.matchMedia({
+  if (hasG && !reduce && $('#tlTrack')) ScrollTrigger.matchMedia({
     '(min-width: 1001px)': function () {
       var track = $('#tlTrack'), dist = function () { return Math.max(0, track.scrollWidth - w.innerWidth); };
       var tp = $('#tlPin'); tp.style.minHeight = '100vh'; tp.style.paddingTop = '84px'; tp.style.paddingBottom = '24px';
       w.EIM_tl = gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: tp, start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: .8, invalidateOnRefresh: true } });
     }
   });
-  if (!hasG || reduce || w.innerWidth <= 1000) $('#tl').style.overflowX = 'auto';
+  if ($('#tl') && (!hasG || reduce || w.innerWidth <= 1000)) $('#tl').style.overflowX = 'auto';
 
 
   /* ---------- testimonials ---------- */
@@ -553,6 +553,7 @@
 
   /* ---------------- hero: glyph pieces arrive after the intro; headline characters rise ---------------- */
   introDone.then(function () {
+    if (!$('.hg')) return;
     if (reduce) {
       G.set('.hg', { opacity: 1 });
       return;
@@ -709,7 +710,7 @@
   })();
 
   /* ---------------- logos: stagger in ---------------- */
-  if (!reduce) G.from('.logos li', { y: 40, opacity: 0, duration: 1, ease: EASE, stagger: .06, scrollTrigger: { trigger: '.logos', start: 'top 88%', once: true } });
+  if (!reduce && $('.logos')) G.from('.logos li', { y: 40, opacity: 0, duration: 1, ease: EASE, stagger: .06, scrollTrigger: { trigger: '.logos', start: 'top 88%', once: true } });
 
   /* ---------------- assess: current running down the ΣIM rails ---------------- */
   (function lines() {
