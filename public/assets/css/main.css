@@ -3,9 +3,9 @@
    Brand (from brand JSON): PP Neue Montreal · #01262D · #38E0CF · #FFFFFF · #0B4A75 · #FAFBFB · #EBEEEE
    Signature: the 27.5° slant of the ΣIM strokes (masks, buttons, rails)
    ========================================================= */
-@font-face{font-family:"PP Neue Montreal";src:url(../fonts/PPNeueMontreal-Regular.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"PP Neue Montreal";src:url(../fonts/PPNeueMontreal-Medium.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:"PP Neue Montreal";src:url(../fonts/PPNeueMontreal-Bold.woff2) format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"PP Neue Montreal";src:url("/assets/fonts/PPNeueMontreal-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"PP Neue Montreal";src:url("/assets/fonts/PPNeueMontreal-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"PP Neue Montreal";src:url("/assets/fonts/PPNeueMontreal-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
 
 
 :root{
@@ -142,7 +142,7 @@ svg use{fill:currentColor}
    4. Highlights are slanted "I" strokes, not rounded pills. */
 :root{--fx:var(--f);--cc:clamp(28px,4.5vw,72px)}
 .cut{clip-path:polygon(0 0,calc(100% - var(--cc)) 0,100% calc(var(--cc) * 1.923),100% 100%,var(--cc) 100%,0 calc(100% - var(--cc) * 1.923))}
-.wm{display:inline-block;aspect-ratio:20/1;background:currentColor;-webkit-mask:url(../img/wordmark.png) center/contain no-repeat;mask:url(../img/wordmark.png) center/contain no-repeat}
+.wm{display:inline-block;aspect-ratio:20/1;background:currentColor;-webkit-mask:url(/assets/img/wordmark.png) center/contain no-repeat;mask:url(/assets/img/wordmark.png) center/contain no-repeat}
 mark{background:none;color:inherit;position:relative;white-space:nowrap;z-index:0}
 mark{padding:0 .36em;margin:0 .06em}
 mark::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:.06em;bottom:-.06em;background:var(--teal);transform-origin:center;transform:skewX(calc(-1*var(--slant)))}
@@ -161,6 +161,7 @@ mark::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:.06em;bo
 .hero{position:relative;background:var(--paper)}
 .hero__pin{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:var(--paper)}
 .hero__svg{position:absolute;inset:0;width:100%;height:100%}
+#heroGlyph{visibility:hidden}
 .hero__copy{position:absolute;left:0;top:0;width:520px;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(18px,2.6vh,28px);color:#FFFFFF;visibility:hidden;opacity:0}
 .hero__copy.is-on{visibility:visible}
 .hero__h{font-size:var(--hfs,3.6rem);font-weight:500;line-height:1.02;letter-spacing:-.04em}
@@ -534,7 +535,12 @@ mark::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:.06em;bo
 .ftr__cols a{display:block;padding:5px 0;color:#FFFFFF;transition:color .3s}
 .ftr__cols a:hover{color:#fff}
 .ftr__offices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;padding-block:40px;border-top:1px solid var(--line-d);font-size:.88rem;line-height:1.5}
-.ftr__base{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-top:40px;border-top:1px solid var(--line-d);font-size:.86rem}
+.ftr__base{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:40px;border-top:1px solid var(--line-d);font-size:.86rem}
+.ftr__base a{color:inherit;transition:color .3s}
+.ftr__base a:hover{color:var(--teal)}
+.ftr__credit{color:rgba(255,255,255,.75)}
+.ftr__credit a{color:var(--teal);text-decoration:none;font-weight:500}
+.ftr__credit a:hover{color:#fff;text-decoration:underline}
 .ftr__mark{display:none}
 
 /* dock CTA */
@@ -830,3 +836,218 @@ html.is-intro,html.is-intro body{overflow:hidden}
 .hero__h mark::before{transform:skewX(calc(-1*var(--slant))) scaleX(var(--mk,1));transform-origin:left center}
 .ftr__tag .nw{white-space:nowrap}
 .stat b,.svc__num,.spec dt{position:relative}
+
+/* ---------- split words typography ---------- */
+.wo{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em;margin-bottom:-.06em}
+.wi{display:inline-block;will-change:transform}
+
+/* =========================================================
+   CONTACT PAGE (EXACT V3 LIGHT/CLEAN DESIGN)
+   - Matches homepage aesthetics: clean white & light mist with dark accents
+   - Clean White Hero with embedded factory truck showcase card
+   - On-ground team & operations section with floating badge
+   - Interactive intent console (tabs, clean form, 5 operational hub cards)
+   - NO brand logos strip (omitted per user/manager request)
+   - Header & Footer 100% consistent with homepage
+   ========================================================= */
+
+.contact-v3-page {
+  background: #FFFFFF;
+  color: #01262D;
+  overflow-x: hidden;
+  font-family: var(--f);
+}
+
+/* Header on /contact-us: identical to homepage solid header */
+.is-contact-page .hdr::before {
+  opacity: 1;
+}
+
+/* Container aligned with the header logo and right-side CTA button */
+.v3-wide-wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gut));
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+
+/* 1. HERO SECTION (CLEAN WHITE) */
+.v3-hero {
+  background: #FFFFFF;
+  padding-top: calc(88px + clamp(44px, 5.5vw, 90px));
+  padding-bottom: clamp(44px, 5.5vw, 84px);
+  position: relative;
+}
+.v3-hero__header {
+  text-align: center;
+  margin-bottom: clamp(56px, 7vw, 110px);
+}
+.v3-hero__h {
+  font-family: var(--f);
+  font-size: clamp(2.8rem, 5.8vw, 5.4rem);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.036em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+/* Scroll Reveal & Micro-Interactions (Simple & Sweet) */
+.v3-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.v3-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.v3-reveal--d1 {
+  transition-delay: 0.12s;
+}
+.v3-reveal--d2 {
+  transition-delay: 0.22s;
+}
+.v3-reveal--d3 {
+  transition-delay: 0.32s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .v3-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+.v3-highlight {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.v3-highlight-mark {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  --mk: 1;
+}
+.v3-highlight-mark::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -0.32em;
+  bottom: 0.04em;
+  height: 0.22em;
+  background: var(--teal);
+  z-index: -1;
+  transform-origin: left center;
+  transform: skewX(calc(-1 * var(--slant))) scaleX(var(--mk, 1));
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+.v3-hero__header:hover .v3-highlight-mark::after {
+  transform: skewX(calc(-1 * var(--slant))) scaleX(1);
+}
+.v3-showcase-card {
+  --cut-x: clamp(28px, 4vw, 56px);
+  --cut-y: calc(var(--cut-x) * 1.923);
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  background: var(--ink);
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--cut-x)) 0,
+    100% var(--cut-y),
+    100% 100%,
+    var(--cut-x) 100%,
+    0 calc(100% - var(--cut-y))
+  );
+  filter: drop-shadow(0 20px 48px rgba(1, 38, 45, 0.1));
+  transition: transform 0.5s var(--ease), filter 0.5s var(--ease);
+}
+.v3-showcase-card:hover {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 28px 58px rgba(1, 38, 45, 0.16));
+}
+.v3-showcase-img {
+  width: 100%;
+  height: clamp(320px, 48vw, 700px);
+  object-fit: cover;
+  object-position: center 62%;
+  display: block;
+  transition: transform 0.85s var(--ease);
+}
+.v3-showcase-card:hover .v3-showcase-img {
+  transform: scale(1.025);
+}
+
+/* 2. REPLICATED DARK THEME ASSESSMENT & CONTACT SECTION */
+.contact-v3-page .assess {
+  position: relative;
+  overflow: hidden;
+  margin-top: clamp(48px, 6vw, 96px);
+  clip-path: polygon(0 0, calc(100% - var(--cc)) 0, 100% calc(var(--cc) * 1.923), 100% 100%, var(--cc) 100%, 0 calc(100% - var(--cc) * 1.923));
+}
+.contact-v3-page .assess .fxlines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.contact-v3-page .assess > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   CONTACT PAGE: SIMPLE & SWEET SCROLL REVEAL ANIMATIONS
+   ========================================================================== */
+
+.v3-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.v3-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.v3-reveal--d1 {
+  transition-delay: 0.12s;
+}
+
+.v3-reveal--d2 {
+  transition-delay: 0.22s;
+}
+
+.v3-reveal--d3 {
+  transition-delay: 0.32s;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .v3-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .v3-highlight-mark::after {
+    transform: skewX(calc(-1 * var(--slant))) scaleX(1) !important;
+    transition: none !important;
+  }
+  .v3-pulse-dot::after {
+    animation: none !important;
+  }
+}
+
+
+
+
+
+
