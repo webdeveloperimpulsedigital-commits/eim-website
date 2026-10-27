@@ -4,7 +4,15 @@
 const meta = typeof document !== 'undefined' ? document.querySelector('meta[name="eim-root"]') : null;
 
 export const ROOT = meta ? meta.getAttribute('content') : '';
-export const url = (p) => ROOT + p;
+export const url = (p) => {
+  if (!ROOT && typeof window !== 'undefined') {
+    const path = window.location.pathname.replace(/\/+$/, '');
+    if (path.endsWith('/contact-us') || path.endsWith('/contact')) {
+      return '/' + p;
+    }
+  }
+  return ROOT + p;
+};
 export const HOME = ROOT || '#top';
 
 // a link to a section of another page; on that page itself, a plain anchor so it scrolls instead of reloading

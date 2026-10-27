@@ -1,10 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-<<<<<<< HEAD
 import { fileURLToPath, URL } from 'node:url'
-=======
 import { resolve } from 'path'
->>>>>>> 1715eb9bc199ac9459620784a8d808b1b6a6385d
 
 // https://vitejs.dev/config/
 export default defineConfig({

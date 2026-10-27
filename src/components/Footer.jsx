@@ -2,9 +2,6 @@ import React from 'react';
 import { url, PAGES, sectionOf } from '../paths';
 
 export default function Footer({ isContactPage }) {
-  const getSectionHref = (hash) => {
-    return isContactPage ? `/${hash}` : hash;
-  };
 
   const handleContactClick = (e) => {
     if (isContactPage) {
@@ -27,43 +24,33 @@ export default function Footer({ isContactPage }) {
           </a>
         </div>
         <div className="ftr__cols">
-<<<<<<< HEAD
           <div>
             <h4>Solutions</h4>
-            <a href={getSectionHref('#maitryi')}>Maitryi model</a>
-            <a href={getSectionHref('#ashwa')}>ASHWA e-tractor</a>
-            <a href={getSectionHref('#swap')}>Battery swapping</a>
-            <a href={getSectionHref('#ecosystem')}>Fast charging</a>
-            <a href={getSectionHref('#proof')}>After-sales service</a>
+            <a href={url(PAGES.maitryi)}>Maitryi model</a>
+            <a href={url(PAGES.ashwa)}>ASHWA e-tractor</a>
+            <a href={url(PAGES.swap)}>Swapping and charging</a>
+            <a href={url(PAGES.ashwa + '#service')}>After-sales service</a>
           </div>
           <div>
             <h4>Industries</h4>
-            <a href={getSectionHref('#industries')}>Ports and container terminals</a>
-            <a href={getSectionHref('#industries')}>Logistics and middle-mile</a>
-            <a href={getSectionHref('#industries')}>Cement, steel and mining</a>
-          </div>
-          <div>
-            <h4>Knowledge</h4>
-            <a href={getSectionHref('#swap-vs-charge')}>Guides</a>
-            <a href={getSectionHref('#faq')}>FAQs</a>
-            <a href={getSectionHref('#news')}>News and press</a>
-            <a href={getSectionHref('#proof')}>Events</a>
+            <a href={url(PAGES.ports)}>Ports and container terminals</a>
+            <a href={url('#industries')}>Logistics and middle-mile</a>
+            <a href={url('#industries')}>Cement, steel and mining</a>
           </div>
           <div>
             <h4>Company</h4>
-            <a href={getSectionHref('#backers')}>About EIM</a>
-            <a href={getSectionHref('#backers')}>Leadership</a>
-            <a href={getSectionHref('#backers')}>Shareholders and partners</a>
-            <a href={getSectionHref('#network')}>Network</a>
-            <a href={getSectionHref('#careers')}>Careers</a>
-            <a href="/contact-us" onClick={handleContactClick}>Contact</a>
+            <a href={url(PAGES.about)}>About EIM</a>
+            <a href={url('#backers')}>Leadership</a>
+            <a href={url('#backers')}>Shareholders and partners</a>
+            <a href={url(PAGES.newsroom)}>Newsroom</a>
           </div>
-=======
-          <div><h4>Solutions</h4><a href={url(PAGES.maitryi)}>Maitryi model</a><a href={url(PAGES.ashwa)}>ASHWA e-tractor</a><a href={url(PAGES.swap)}>Swapping and charging</a><a href={url(PAGES.ashwa + '#service')}>After-sales service</a></div>
-          <div><h4>Industries</h4><a href={url(PAGES.ports)}>Ports and container terminals</a><a href={url('#industries')}>Logistics and middle-mile</a><a href={url('#industries')}>Cement, steel and mining</a></div>
-          <div><h4>Company</h4><a href={url(PAGES.about)}>About EIM</a><a href={url('#backers')}>Leadership</a><a href={url('#backers')}>Shareholders and partners</a><a href={url(PAGES.newsroom)}>Newsroom</a></div>
-          <div><h4>Get in touch</h4><a href={sectionOf(PAGES.swap, '#network')}>Network</a><a href={url('#careers')}>Careers</a><a href="#assess">Contact</a><a href="#assess">Assess your fleet</a></div>
->>>>>>> 1715eb9bc199ac9459620784a8d808b1b6a6385d
+          <div>
+            <h4>Get in touch</h4>
+            <a href={sectionOf(PAGES.swap, '#network')}>Network</a>
+            <a href={url('#careers')}>Careers</a>
+            <a href="/contact-us" onClick={handleContactClick}>Contact</a>
+            <a href="/contact-us" onClick={handleContactClick}>Assess your fleet</a>
+          </div>
         </div>
         <div className="ftr__offices">
           <div><h4>Mumbai (HQ)</h4><p>1A, 1st floor, Kohinoor Square, Dadar (W), Mumbai 400028</p></div>
