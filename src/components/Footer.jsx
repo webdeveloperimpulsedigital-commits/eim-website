@@ -13,12 +13,14 @@ export default function Footer({ isContactPage }) {
     }
   };
 
+  const contactHref = url('contact-us');
+
   return (
     <footer className="ftr">
       <div className="wrap">
         <div className="ftr__top">
           <p className="ftr__tag">Heavy mobility <span className="nw">r<b>EIM</b>agined.</span></p>
-          <a className="btn btn--teal" href="/contact-us" onClick={handleContactClick}>
+          <a className="btn btn--teal" href={contactHref} onClick={handleContactClick}>
             <span>Assess your fleet</span>
             <svg><use href="#arrow" /></svg>
           </a>
@@ -48,8 +50,8 @@ export default function Footer({ isContactPage }) {
             <h4>Get in touch</h4>
             <a href={sectionOf(PAGES.swap, '#network')}>Network</a>
             <a href={url('#careers')}>Careers</a>
-            <a href="/contact-us" onClick={handleContactClick}>Contact</a>
-            <a href="/contact-us" onClick={handleContactClick}>Assess your fleet</a>
+            <a href={contactHref} onClick={handleContactClick}>Contact</a>
+            <a href={contactHref} onClick={handleContactClick}>Assess your fleet</a>
           </div>
         </div>
         <div className="ftr__offices">

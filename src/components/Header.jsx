@@ -12,7 +12,8 @@ export default function Header({ current, onDark = false, isContactPage }) {
   const NETWORK = sectionOf(PAGES.swap, '#network');
   // only the ports page is built so far; the other industries still point at the homepage section
   const PORTS = sectionOf(PAGES.ports, '#top');
-  const homeHref = isContactPage ? '/' : HOME;
+  const homeHref = isContactPage ? (typeof window !== 'undefined' ? (window.location.pathname.replace(/\/(contact-us|contact)\/?$/, '') || '/') : '/') : HOME;
+  const contactHref = url('contact-us');
 
   const handleContactClick = (e) => {
     if (isContactPage) {
@@ -223,7 +224,7 @@ export default function Header({ current, onDark = false, isContactPage }) {
           </nav>
           <div className="hdr__right">
             <a className="hdr__mail" href="mailto:powerup@energyinmotion.in">powerup@energyinmotion.in</a>
-            <a className="btn btn--teal btn--sm" href="/contact-us" onClick={handleContactClick}>
+            <a className="btn btn--teal btn--sm" href={contactHref} onClick={handleContactClick}>
               <span>Assess your fleet</span>
             </a>
             <button className="burger" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu">
@@ -272,7 +273,7 @@ export default function Header({ current, onDark = false, isContactPage }) {
               <li><a href={url('#backers')}><b>Leadership</b><span>The team running EIM.</span></a></li>
               <li><a href={url('#backers')}><b>Shareholders and partners</b><span>Ravindra Energy, J M Baxi, Foton.</span></a></li>
               <li>
-                <a href="/contact-us" onClick={handleContactClick}>
+                <a href={contactHref} onClick={handleContactClick}>
                   <b>Contact</b><span>Offices in Mumbai, Noida, Pune and Nhava Sheva.</span>
                 </a>
               </li>
@@ -294,10 +295,10 @@ export default function Header({ current, onDark = false, isContactPage }) {
           <a className="mnav__top" href={NETWORK}>Network</a>
           <a className="mnav__top" href={url(PAGES.newsroom)}>Newsroom</a>
           <details><summary>Company</summary>
-            <a href={url(PAGES.about)}>About EIM</a><a href={url('#backers')}>Leadership</a><a href={url('#backers')}>Shareholders and partners</a><a href="/contact-us" onClick={handleContactClick}>Contact</a>
+            <a href={url(PAGES.about)}>About EIM</a><a href={url('#backers')}>Leadership</a><a href={url('#backers')}>Shareholders and partners</a><a href={contactHref} onClick={handleContactClick}>Contact</a>
           </details>
           <a className="mnav__top" href={url('#careers')}>Careers</a>
-          <a className="btn btn--teal" href="/contact-us" onClick={handleContactClick}><span>Assess your fleet</span></a>
+          <a className="btn btn--teal" href={contactHref} onClick={handleContactClick}><span>Assess your fleet</span></a>
           <a className="mnav__mail" href="mailto:powerup@energyinmotion.in">powerup@energyinmotion.in</a>
         </div>
       </div>

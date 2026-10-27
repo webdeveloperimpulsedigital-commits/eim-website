@@ -8,7 +8,8 @@ export const url = (p) => {
   if (!ROOT && typeof window !== 'undefined') {
     const path = window.location.pathname.replace(/\/+$/, '');
     if (path.endsWith('/contact-us') || path.endsWith('/contact')) {
-      return '/' + p;
+      const base = path.replace(/\/(contact-us|contact)$/, '') + '/';
+      return base + p.replace(/^\//, '');
     }
   }
   return ROOT + p;

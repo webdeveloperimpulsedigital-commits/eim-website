@@ -17,6 +17,7 @@ import Careers from './components/Careers';
 import FleetAssessmentForm from './components/FleetAssessmentForm';
 import Footer from './components/Footer';
 import ContactPage from './components/ContactPage';
+import { url } from './paths';
 
 export default function App() {
   const getIsContactPath = () => {
@@ -63,26 +64,27 @@ export default function App() {
     if (currentPage !== 'home') return;
 
     const scriptUrls = [
-      '/assets/vendor/gsap.min.js',
-      '/assets/vendor/ScrollTrigger.min.js',
-      '/assets/vendor/SplitText.min.js',
-      '/assets/vendor/Flip.min.js',
-      '/assets/vendor/DrawSVGPlugin.min.js',
-      '/assets/vendor/CustomEase.min.js',
-      '/assets/vendor/motion.js',
-      '/assets/vendor/lenis.min.js',
-      '/assets/js/main.js',
+      'assets/vendor/gsap.min.js',
+      'assets/vendor/ScrollTrigger.min.js',
+      'assets/vendor/SplitText.min.js',
+      'assets/vendor/Flip.min.js',
+      'assets/vendor/DrawSVGPlugin.min.js',
+      'assets/vendor/CustomEase.min.js',
+      'assets/vendor/motion.js',
+      'assets/vendor/lenis.min.js',
+      'assets/js/main.js',
     ];
 
     let isCancelled = false;
 
     const loadScriptsSequentially = async () => {
-      for (const url of scriptUrls) {
+      for (const p of scriptUrls) {
         if (isCancelled) break;
-        if (document.querySelector(`script[src="${url}"]`)) continue;
+        const src = url(p);
+        if (document.querySelector(`script[src="${src}"]`)) continue;
         await new Promise((resolve) => {
           const script = document.createElement('script');
-          script.src = url;
+          script.src = src;
           script.async = false;
           script.onload = resolve;
           script.onerror = resolve;

@@ -12,7 +12,7 @@ export default defineConfig({
       'next/dynamic': fileURLToPath(new URL('./src/lib/next-dynamic-shim.js', import.meta.url)),
     },
   },
-  base: '/',
+  base: './',
   server: {
     port: 3000,
     open: true
