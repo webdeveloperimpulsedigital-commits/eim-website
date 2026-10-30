@@ -644,5 +644,56 @@
     } });
   })();
 
+  /* ---------------- contact: links to this same page go to the console instead of reloading ---------------- */
+  (function contact() {
+    var con = $('#console'); if (!con || !$('.ct')) return;
+    d.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]'); if (!a || a.hash) return;
+      var u = new URL(a.href, location.href);
+      if (u.pathname.replace(/\/+$/, '') !== location.pathname.replace(/\/+$/, '')) return;
+      e.preventDefault();
+      if (w.__lenis) w.__lenis.scrollTo(con, { offset: -110, duration: 1.2 }); else con.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    });
+    if (anim) {
+      G.from('.ctp', { y: 30, opacity: 0, duration: .9, ease: EASE, stagger: .07, delay: .5, clearProps: 'opacity,transform' });
+      G.from('.ct__panel', { y: 40, opacity: 0, duration: 1.1, ease: EASE, delay: .7, clearProps: 'opacity,transform' });
+      G.from('.stop', { y: 36, opacity: 0, duration: 1, ease: EASE, stagger: .09, scrollTrigger: { trigger: '.rail', start: 'top 85%', once: true } });
+    }
+  })();
+
+  /* ---------------- leadership ---------------- */
+  (function leadership() {
+    var lf = $('.lf'); if (!lf) return;
+    // sticky section nav follows the section in view
+    var links = $$('.lsub a'), secs = links.map(function (a) { return $(a.getAttribute('href')); });
+    function on(i) { links.forEach(function (a, k) { a.classList.toggle('is-on', k === i); }); }
+    if (ST) secs.forEach(function (sx, i) { if (sx) ST.create({ trigger: sx, start: 'top 40%', end: 'bottom 40%', onToggle: function (st) { if (st.isActive) on(i); } }); });
+    // history rail buttons
+    var rail = $('.lh__rail');
+    $$('.lh__b').forEach(function (bt) { bt.addEventListener('click', function () { var c = $('.lhc', rail); rail.scrollBy({ left: (bt.classList.contains('lh__b--prev') ? -1 : 1) * (c.offsetWidth + 20) * 2, behavior: reduce ? 'auto' : 'smooth' }); }); });
+    if (!anim) return;
+    // founders: headline rises, portraits wipe in on the slant, names follow
+    G.from('.lf__head > *', { y: 30, opacity: 0, duration: 1.1, ease: EASE, stagger: .08, delay: .1, clearProps: 'opacity,transform' });
+    G.from('.lf .lf__tier', { opacity: 0, duration: .8, delay: .4 });
+    $$('.lfp').forEach(function (p, k) {
+      var fig = $('.lfp__img', p), o = { p: 0 }; fig.style.clipPath = poly(0);
+      G.to(o, { p: 1, duration: 1.4, ease: 'expo.inOut', delay: .45 + k * .15, onUpdate: function () { fig.style.clipPath = poly(o.p); }, onComplete: function () { fig.style.clipPath = ''; } });
+      var im = $('img', fig); if (im) G.fromTo(im, { scale: 1.2 }, { scale: 1, duration: 2, ease: EASE, delay: .45 + k * .15, clearProps: 'transform' });
+      G.from($$('.lfp__txt > *', p), { y: 24, opacity: 0, duration: 1, ease: EASE, stagger: .08, delay: 1 + k * .15, clearProps: 'opacity,transform' });
+    });
+    // the statement: the picture drifts, the quote rises word by word
+    G.fromTo('.lq__bg', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.lq', start: 'top bottom', end: 'bottom top', scrub: true } });
+    var q = $('.lq__q');
+    if (q) {
+      (function walk(node) { Array.prototype.slice.call(node.childNodes).forEach(function (n) { if (n.nodeType === 3) { var f = d.createDocumentFragment(); n.textContent.split(/(\s+)/).forEach(function (t) { if (!t) return; if (/^\s+$/.test(t)) { f.appendChild(d.createTextNode(t)); return; } var o2 = d.createElement('span'); o2.className = 'wo'; var i2 = d.createElement('span'); i2.className = 'wi'; i2.textContent = t; o2.appendChild(i2); f.appendChild(o2); }); n.parentNode.replaceChild(f, n); } }); })(q);
+      G.from($$('.wi', q), { yPercent: 110, duration: 1, ease: EASE, stagger: .025, scrollTrigger: { trigger: q, start: 'top 80%', once: true } });
+      G.from('.lq__by', { y: 20, opacity: 0, duration: .9, ease: EASE, scrollTrigger: { trigger: q, start: 'top 70%', once: true } });
+    }
+    G.from('.ls__roots li', { y: 40, opacity: 0, duration: 1, ease: EASE, stagger: .12, scrollTrigger: { trigger: '.ls__roots', start: 'top 82%', once: true } });
+    G.from('.lhc', { x: 80, opacity: 0, duration: 1.1, ease: EASE, stagger: .07, scrollTrigger: { trigger: '.lh__rail', start: 'top 85%', once: true } });
+    $$('.lhc__img img').forEach(function (im) { reveal(im); });
+    G.from('.ltp', { y: 40, opacity: 0, duration: 1, ease: EASE, stagger: .06, scrollTrigger: { trigger: '.lt__grid', start: 'top 85%', once: true } });
+  })();
+
   w.addEventListener('load', function () { if (ST) ST.refresh(); });
 })();
