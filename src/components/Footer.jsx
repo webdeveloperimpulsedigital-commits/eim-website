@@ -42,7 +42,7 @@ export default function Footer({ isContactPage }) {
           <div>
             <h4>Company</h4>
             <a href={url(PAGES.about)}>About EIM</a>
-            <a href={url('#backers')}>Leadership</a>
+            <a href={url(PAGES.leadership)}>Leadership</a>
             <a href={url('#backers')}>Shareholders and partners</a>
             <a href={url(PAGES.newsroom)}>Newsroom</a>
           </div>

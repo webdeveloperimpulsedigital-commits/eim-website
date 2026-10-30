@@ -27,4 +27,5 @@ export const PAGES = {
   ports: 'industries/ports-and-terminals/',
   newsroom: 'newsroom/',
   about: 'about/',
+  leadership: 'leadership/',
 };

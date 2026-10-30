@@ -270,7 +270,7 @@ export default function Header({ current, onDark = false, isContactPage }) {
             </div>
             <ul className="mega__grid">
               <li><a href={url(PAGES.about)}><b>About EIM</b><span>What we're building and why.</span></a></li>
-              <li><a href={url('#backers')}><b>Leadership</b><span>The team running EIM.</span></a></li>
+              <li><a href={url(PAGES.leadership)}><b>Leadership</b><span>The team running EIM.</span></a></li>
               <li><a href={url('#backers')}><b>Shareholders and partners</b><span>Ravindra Energy, J M Baxi, Foton.</span></a></li>
               <li>
                 <a href={contactHref} onClick={handleContactClick}>
@@ -295,7 +295,7 @@ export default function Header({ current, onDark = false, isContactPage }) {
           <a className="mnav__top" href={NETWORK}>Network</a>
           <a className="mnav__top" href={url(PAGES.newsroom)}>Newsroom</a>
           <details><summary>Company</summary>
-            <a href={url(PAGES.about)}>About EIM</a><a href={url('#backers')}>Leadership</a><a href={url('#backers')}>Shareholders and partners</a><a href={contactHref} onClick={handleContactClick}>Contact</a>
+            <a href={url(PAGES.about)}>About EIM</a><a href={url(PAGES.leadership)}>Leadership</a><a href={url('#backers')}>Shareholders and partners</a><a href={contactHref} onClick={handleContactClick}>Contact</a>
           </details>
           <a className="mnav__top" href={url('#careers')}>Careers</a>
           <a className="btn btn--teal" href={contactHref} onClick={handleContactClick}><span>Assess your fleet</span></a>
