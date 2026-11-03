@@ -15,14 +15,33 @@
         if ('scrollRestoration' in history) {
           history.scrollRestoration = 'manual';
         }
+        var r = document.documentElement;
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          r.classList.add('is-pre');
+          setTimeout(function () { r.classList.remove('is-pre'); }, 3000);
+        }
       } catch(e){}
     })();
   </script>
-  <script type="module" crossorigin src="./assets/main-CtAC0jXU.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/main-DM5m6JU4.js">
-  <link rel="modulepreload" crossorigin href="./assets/NetworkExplorer-D5mjCvMT.js">
-  <link rel="modulepreload" crossorigin href="./assets/FleetAssessmentForm-DWxvt3VH.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-BRF3m8ia.css">
+  <style>
+    html.is-pre .hero__pin,
+    html.is-pre .ihero,
+    html.is-pre .phero,
+    html.is-pre .ph,
+    html.is-pre .jnh,
+    html.is-pre .svh,
+    html.is-pre .ct,
+    html.is-pre .lf,
+    html.is-pre .abx,
+    html.is-pre .nhero {
+      visibility: hidden !important;
+    }
+  </style>
+  <script type="module" crossorigin src="./assets/main-B7OZsbjT.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/main-Bzv14neV.js">
+  <link rel="modulepreload" crossorigin href="./assets/NetworkExplorer-DCjXtl_Q.js">
+  <link rel="modulepreload" crossorigin href="./assets/FleetAssessmentForm-B8K8IbJO.js">
+  <link rel="stylesheet" crossorigin href="./assets/main-BdNAmFi2.css">
 </head>
 <body>
 
