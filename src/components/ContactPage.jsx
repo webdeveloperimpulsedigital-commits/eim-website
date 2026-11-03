@@ -290,7 +290,7 @@ export default function ContactPage() {
         <div className="wrap assess__grid">
           <div className="assess__copy">
             <h2 className="h2" id="as-h">
-              What do you want to electrify?
+              Ready to Make the Shift to Electric?
             </h2>
             <p className="lede">
               Pick one, leave a number, and our fleet team will come back with a plan built around your routes.

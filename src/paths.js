@@ -28,4 +28,6 @@ export const PAGES = {
   newsroom: 'newsroom/',
   about: 'about/',
   leadership: 'leadership/',
+  service: 'solutions/after-sales-service/',
+  careers: 'careers/',
 };

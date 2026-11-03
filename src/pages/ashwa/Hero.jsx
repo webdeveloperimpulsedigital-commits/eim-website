@@ -1,15 +1,16 @@
 import React from 'react';
 import { url, PAGES } from '../../paths';
 
-// Product hero: a dark stage inset in the white page, so the header keeps its white ground.
-// The studio clip of the truck turning plays once and holds on its last frame (also the poster).
+// Product hero: a full-screen dark stage. The reel (about 15 s, looping) cuts EIM Truck studio clips together:
+// the truck turning, wheel, headlight, ΣIM door, H45XP badge, the real cabin (photoshoot still, slow push-in) and the
+// 3/4 front. The AI sparkle watermark is removed. Previous version: a-hero.mp4, played once.
 // 55 t, 536 HP, 2,500 Nm: slides 19 and 20. Swap under 7 minutes: slide 15. 40%: slide 15.
 export default function Hero() {
   return (
-    <section className="phero" id="top" aria-labelledby="ah-h">
+    <section className="phero phero--full" id="top" aria-labelledby="ah-h">
       <div className="phero__stage">
-        <video className="phero__media" muted playsInline preload="auto" poster={url('assets/img/ashwa/a-hero-poster.webp')} aria-hidden="true">
-          <source src={url('assets/video/a-hero.mp4')} type="video/mp4" />
+        <video className="phero__media" muted playsInline loop preload="auto" poster={url('assets/img/ashwa/a-hero-reel-poster.webp')} aria-hidden="true">
+          <source src={url('assets/video/a-hero-reel.mp4')} type="video/mp4" />
         </video>
         <div className="phero__copy ihero__copy">
           <nav className="crumb crumb--dark" aria-label="Breadcrumb">

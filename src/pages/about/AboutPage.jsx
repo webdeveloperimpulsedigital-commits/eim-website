@@ -253,8 +253,8 @@ function Leader() {
       <div className="wrap mdl__grid">
         <div className="mdl__who">
           <img className="mdl__pic" src={url('assets/img/narendra.webp')} width="249" height="257" alt="Narendra Murkumbi" loading="lazy" />
-          <p className="mdl__lab">Managing Director &amp; CEO</p>
-          <h2 className="h2" id="md-h">Narendra Murkumbi. <em>A builder of industries.</em></h2>
+          <p className="mdl__lab">Co-founder, Managing Director &amp; CEO</p>
+          <h2 className="h2" id="md-h">Narendra Murkumbi. <em>From building industries to changing how they move.</em></h2>
           <ul className="mdl__cv">
             <li>Co-founded Shree Renuka Sugars in 1998, now one of the largest sugar manufacturers globally</li>
             <li>Founder and Vice Chairman of Ravindra Energy</li>

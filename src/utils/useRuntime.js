@@ -19,8 +19,42 @@ const VENDOR = [
 export default function useRuntime(extra = []) {
   useEffect(() => {
     let isCancelled = false;
+    const allScripts = VENDOR.concat(extra);
+    const headScripts = [
+      'assets/vendor/gsap.min.js',
+      'assets/vendor/ScrollTrigger.min.js',
+      'assets/vendor/SplitText.min.js',
+      'assets/vendor/Flip.min.js',
+      'assets/vendor/DrawSVGPlugin.min.js',
+      'assets/vendor/CustomEase.min.js',
+      'assets/vendor/motion.js',
+      'assets/vendor/lenis.min.js',
+    ];
+
+    const toLoadInParallel = headScripts.filter((p) => allScripts.includes(p));
+    const remaining = allScripts.filter((p) => !headScripts.includes(p));
+
+    const loadParallel = (scripts) =>
+      Promise.all(
+        scripts.map(
+          (p) =>
+            new Promise((resolve) => {
+              const src = url(p);
+              if (document.querySelector(`script[src="${src}"]`)) return resolve();
+              const s = document.createElement('script');
+              s.src = src;
+              s.async = false;
+              s.onload = resolve;
+              s.onerror = resolve;
+              document.head.appendChild(s);
+            })
+        )
+      );
+
     const load = async () => {
-      for (const p of VENDOR.concat(extra)) {
+      await loadParallel(toLoadInParallel);
+      if (isCancelled) return;
+      for (const p of remaining) {
         if (isCancelled) break;
         const src = url(p);
         if (document.querySelector(`script[src="${src}"]`)) continue;

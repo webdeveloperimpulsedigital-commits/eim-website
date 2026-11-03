@@ -206,7 +206,7 @@ export default function ContactUsPage() {
       <a className="skip" href="#main">
         Skip to content
       </a>
-      <Header current="company" onDark />
+      <Header current="contact" onDark />
       <main id="main">
         <Hero />
         <Offices />

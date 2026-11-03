@@ -1,10 +1,11 @@
 import React from 'react';
+import { url, PAGES } from '../paths';
 
 export default function Careers() {
   const roles = [
-    { title: 'Operator', dept: 'Operations', loc: 'Thanjavur, Chennai' },
-    { title: 'Charger Technician', dept: 'Technical', loc: 'Amirghadh, Gujarat' },
-    { title: 'Sales Co-ordinator', dept: 'Sales', loc: 'Navi Mumbai' },
+    { id: 'operator', title: 'Operator', dept: 'Operations', loc: 'Thanjavur, Chennai' },
+    { id: 'charger-technician', title: 'Charger Technician', dept: 'Technical', loc: 'Amirghadh, Gujarat' },
+    { id: 'sales-coordinator', title: 'Sales Co-ordinator', dept: 'Sales', loc: 'Navi Mumbai' },
   ];
 
   const handleAnchorClick = (e, href) => {
@@ -33,8 +34,7 @@ export default function Careers() {
           </p>
           <a
             className="btn btn--ink"
-            href="#careers"
-            onClick={(e) => handleAnchorClick(e, '#careers')}
+            href={url(PAGES.careers + '#roles')}
           >
             <span>See all open roles</span>
             <svg><use href="#arrow" /></svg>
@@ -43,7 +43,7 @@ export default function Careers() {
         <ul className="roles">
           {roles.map((role, i) => (
             <li key={i}>
-              <a href="#careers" onClick={(e) => handleAnchorClick(e, '#careers')}>
+              <a href={url(PAGES.careers + '#role-' + role.id)}>
                 <span className="roles__t">
                   <b>{role.title}</b>
                   {role.dept}

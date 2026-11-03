@@ -41,9 +41,9 @@ export default function TwoWays() {
         <figure className="quote ways__quote">
           <figcaption>
             <img src={url('assets/img/t-vitthal.webp')} alt="" width="56" height="56" loading="lazy" />
-            <span><b>Vitthal Wable</b>Director, Radiance Green Mobility and Jyothi Transport &amp; Freight Services</span>
+            <span><b>Vitthal Wable</b>Director, Radiance Green Mobility Pvt. Ltd., Jyothi Transport &amp; Freight Services Pvt. Ltd.</span>
           </figcaption>
-          <blockquote>“As one of the early users of EIM vehicles at JNPT Port at Navi Mumbai, I’m amazed at the way EIM has created the charging infra in the JNPT eco-system comprising of multiple Swapping-cum-Charging stations - in terms of speed &amp; scale.”</blockquote>
+          <blockquote>“As one of the early users of EIM vehicles at JNPT Port at Navi Mumbai, I’m amazed at the way EIM has created the charging infra in the JNPT eco-system comprising of multiple Swapping-cum-Charging stations - in terms of speed &amp; scale. Looking at current oil prices, I feel lucky I switched to EV early.”</blockquote>
         </figure>
       </div>
     </section>

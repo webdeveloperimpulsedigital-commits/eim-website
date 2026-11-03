@@ -55,20 +55,23 @@
   /* ---------------- hero: lines rise, the mark sweeps in, the picture wipes on the slant ---------------- */
   (function hero() {
     var h = $('.ihero__h');
-    if (!h || !anim) { root.classList.remove('is-pre'); return; }
+    if (!h || !anim) return;
     var lines = $$('.ln', h).map(function (ln) {
       var r = d.createElement('span'); r.className = 'lr';
       while (ln.firstChild) r.appendChild(ln.firstChild);
       ln.appendChild(r); ln.classList.add('is-split'); return r;
     });
     var img = $('.ihero__fig img, .ihero__fig video') || $('.phero__media'), o = { p: 0 };
+    G.set(lines, { yPercent: 112 });
+    G.set('.ihero__h mark', { '--mk': 0 });
+    G.set('.ihero__sub', { y: 18, opacity: 0 });
+    if ($('.ihero__ctas .btn')) G.set('.ihero__ctas .btn', { y: 18, opacity: 0 });
     var tl = G.timeline({ delay: .1 })
       .from('.crumb', { y: 14, opacity: 0, duration: .7, ease: EASE }, 0)
-      .fromTo(lines, { yPercent: 112 }, { yPercent: 0, duration: 1.1, ease: EASE, stagger: .12 }, .05)
-      .fromTo('.ihero__h mark', { '--mk': 0 }, { '--mk': 1, duration: .7, ease: EASE }, .6)
-      .from('.ihero__sub', { y: 18, opacity: 0, duration: .8, ease: EASE }, .45)
-      ;
-    if ($('.ihero__ctas .btn')) tl.from('.ihero__ctas .btn', { y: 18, opacity: 0, duration: .7, ease: EASE, stagger: .08 }, .55);
+      .to(lines, { yPercent: 0, duration: 1.1, ease: EASE, stagger: .12 }, .05)
+      .to('.ihero__h mark', { '--mk': 1, duration: .7, ease: EASE }, .6)
+      .to('.ihero__sub', { y: 0, opacity: 1, duration: .8, ease: EASE }, .45);
+    if ($('.ihero__ctas .btn')) tl.to('.ihero__ctas .btn', { y: 0, opacity: 1, duration: .7, ease: EASE, stagger: .08 }, .55);
     if ($('.ptag')) tl.from('.ptag', { y: 16, opacity: 0, duration: .7, ease: EASE, stagger: .14 }, 1.15);
     if (img && img.tagName === 'VIDEO') tl.call(function () { try { img.currentTime = 0; } catch (e) {} var pr = img.play(); if (pr && pr.catch) pr.catch(function () {}); }, null, .35);
     if (img) {
@@ -76,7 +79,6 @@
       tl.to(o, { p: 1, duration: 1.4, ease: 'expo.inOut', onUpdate: function () { img.style.clipPath = poly(o.p); }, onComplete: function () { img.style.clipPath = ''; } }, .1)
         .to(img, { scale: 1, duration: 1.8, ease: EASE }, .1);
     }
-    root.classList.remove('is-pre');
     if ($('.terms')) G.from('.term', { y: 32, opacity: 0, duration: 1, ease: EASE, stagger: .1, scrollTrigger: { trigger: '.terms', start: 'top 94%', once: true } });
   })();
 
@@ -357,21 +359,22 @@
     words = $$('.vh__w', hero);
     // the captions' own opacity transition would turn this into a visible fade-out, so it is off until they arrive
     G.set(caps.concat($$('.vh__read', hero)), { opacity: 0, y: 16, transition: 'none' });
+    G.set(lrs, { yPercent: 112 });
+    G.set('.vh__sub, .vh__ctas .btn', { y: 18, opacity: 0 });
     var tl = G.timeline({ delay: .1 });
     tl.from('.vh__rails', { opacity: 0, duration: 1.4, ease: 'power1.out' }, 0);
     if (w.DrawSVGPlugin) tl.from($$('.stk__line polygon', hero), { drawSVG: '0%', duration: 1.3, ease: 'power2.inOut', stagger: .14 }, .15);
     imgs.forEach(function (im, k) {
       var o = { p: 0 }; im.style.clipPath = poly(0);
-      tl.to(o, { p: 1, duration: 1.3, ease: 'expo.inOut', onUpdate: function () { im.style.clipPath = poly(o.p); }, onComplete: function () { im.style.clipPath = ''; } }, .75 + k * .16)
+      tl.to(o, { p: 1, duration: 1.3, ease: 'expo.inOut', onUpdate: function () { im.style.clipPath = poly(o.p); }, onComplete: function () { img.style.clipPath = ''; } }, .75 + k * .16)
         .fromTo(im, { scale: 1.28 }, { scale: 1.06, duration: 2, ease: EASE, clearProps: 'transform' }, .75 + k * .16);
     });
     tl.from('.vh .crumb', { y: 14, opacity: 0, duration: .7, ease: EASE }, .35)
-      .fromTo(lrs, { yPercent: 112 }, { yPercent: 0, duration: 1.1, ease: EASE, stagger: .1 }, .45)
-      .from('.vh__sub, .vh__ctas .btn', { y: 18, opacity: 0, duration: .8, ease: EASE, stagger: .08 }, .9)
+      .to(lrs, { yPercent: 0, duration: 1.1, ease: EASE, stagger: .1 }, .45)
+      .to('.vh__sub, .vh__ctas .btn', { y: 0, opacity: 1, duration: .8, ease: EASE, stagger: .08 }, .9)
       .to(caps, { y: 0, opacity: 1, duration: .8, ease: EASE, stagger: .1, clearProps: 'opacity,transform,transition' }, 1.35)
       .to('.vh__read', { y: 0, opacity: 1, duration: .8, ease: EASE, clearProps: 'opacity,transform,transition' }, 1.45)
       .call(function () { begin(); G.fromTo(mk, { scaleX: 0 }, { scaleX: 1, transformOrigin: 'left center', duration: .7, ease: EASE }); }, null, 1.55);
-    root.classList.remove('is-pre');
 
     // leaving: the strokes slide away along their own angle, each a little further than the last
     ST.matchMedia({ '(min-width: 1001px)': function () {
@@ -655,8 +658,9 @@
       if (w.__lenis) w.__lenis.scrollTo(con, { offset: -110, duration: 1.2 }); else con.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
     });
     if (anim) {
-      G.from('.ctp', { y: 30, opacity: 0, duration: .9, ease: EASE, stagger: .07, delay: .5, clearProps: 'opacity,transform' });
-      G.from('.ct__panel', { y: 40, opacity: 0, duration: 1.1, ease: EASE, delay: .7, clearProps: 'opacity,transform' });
+      G.set(['.ctp', '.ct__panel'], { opacity: 0 });
+      G.fromTo('.ctp', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .9, ease: EASE, stagger: .07, delay: .5, clearProps: 'opacity,transform' });
+      G.fromTo('.ct__panel', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: EASE, delay: .7, clearProps: 'opacity,transform' });
       G.from('.stop', { y: 36, opacity: 0, duration: 1, ease: EASE, stagger: .09, scrollTrigger: { trigger: '.rail', start: 'top 85%', once: true } });
     }
   })();
@@ -673,13 +677,16 @@
     $$('.lh__b').forEach(function (bt) { bt.addEventListener('click', function () { var c = $('.lhc', rail); rail.scrollBy({ left: (bt.classList.contains('lh__b--prev') ? -1 : 1) * (c.offsetWidth + 20) * 2, behavior: reduce ? 'auto' : 'smooth' }); }); });
     if (!anim) return;
     // founders: headline rises, portraits wipe in on the slant, names follow
-    G.from('.lf__head > *', { y: 30, opacity: 0, duration: 1.1, ease: EASE, stagger: .08, delay: .1, clearProps: 'opacity,transform' });
-    G.from('.lf .lf__tier', { opacity: 0, duration: .8, delay: .4 });
+    G.set('.lf__head > *', { y: 30, opacity: 0 });
+    G.set('.lf .lf__tier', { opacity: 0 });
+    G.fromTo('.lf__head > *', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: EASE, stagger: .08, delay: .1, clearProps: 'opacity,transform' });
+    G.fromTo('.lf .lf__tier', { opacity: 0 }, { opacity: 1, duration: .8, delay: .4 });
     $$('.lfp').forEach(function (p, k) {
       var fig = $('.lfp__img', p), o = { p: 0 }; fig.style.clipPath = poly(0);
+      G.set($$('.lfp__txt > *', p), { y: 24, opacity: 0 });
       G.to(o, { p: 1, duration: 1.4, ease: 'expo.inOut', delay: .45 + k * .15, onUpdate: function () { fig.style.clipPath = poly(o.p); }, onComplete: function () { fig.style.clipPath = ''; } });
       var im = $('img', fig); if (im) G.fromTo(im, { scale: 1.2 }, { scale: 1, duration: 2, ease: EASE, delay: .45 + k * .15, clearProps: 'transform' });
-      G.from($$('.lfp__txt > *', p), { y: 24, opacity: 0, duration: 1, ease: EASE, stagger: .08, delay: 1 + k * .15, clearProps: 'opacity,transform' });
+      G.fromTo($$('.lfp__txt > *', p), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: EASE, stagger: .08, delay: 1 + k * .15, clearProps: 'opacity,transform' });
     });
     // the statement: the picture drifts, the quote rises word by word
     G.fromTo('.lq__bg', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.lq', start: 'top bottom', end: 'bottom top', scrub: true } });
@@ -695,5 +702,178 @@
     G.from('.ltp', { y: 40, opacity: 0, duration: 1, ease: EASE, stagger: .06, scrollTrigger: { trigger: '.lt__grid', start: 'top 85%', once: true } });
   })();
 
+  /* ---------------- after-sales ---------------- */
+  (function service() {
+    if (!$('.svh')) return;
+    // three ways: hover or focus opens a panel; on its own it moves on every few seconds
+    var ps = $$('.w3p'), cur = 0, held = false, timer = null;
+    var desk = function () { return w.matchMedia('(min-width:1001px)').matches; };
+    function open(i) { cur = i; ps.forEach(function (p, k) { p.classList.toggle('is-on', k === i); }); }
+    ps.forEach(function (p, i) {
+      p.addEventListener('mouseenter', function () { if (desk()) { held = true; open(i); } });
+      p.addEventListener('focus', function () { held = true; open(i); });
+    });
+    var row = $('.w3'); if (row) row.addEventListener('mouseleave', function () { held = false; });
+    if (!reduce) timer = setInterval(function () { if (!held && desk()) open((cur + 1) % ps.length); }, 4200);
+
+    // voices: auto-advance with a filling bar; a click holds the choice
+    var qs = $$('.svq'), dots = $$('.svv__dot'), qi = 0, qt = null;
+    function show(i, hold) {
+      qi = i;
+      qs.forEach(function (q, k) { q.classList.toggle('is-on', k === i); });
+      dots.forEach(function (dt, k) { dt.classList.remove('is-on', 'is-held'); if (k === i) { void dt.offsetWidth; dt.classList.add(hold ? 'is-held' : 'is-on'); } });
+      clearTimeout(qt); if (!hold && !reduce) qt = setTimeout(function () { show((qi + 1) % qs.length); }, 9000);
+    }
+    dots.forEach(function (dt, i) { dt.addEventListener('click', function () { show(i, true); }); });
+    if (qs.length) show(0, reduce);
+
+    if (!anim) return;
+    // hero: arrives once, then holds still
+    var img = $('.svh__fig img'), o = { p: 0 };
+    img.style.clipPath = poly(0); G.set(img, { scale: 1.12 });
+    G.timeline({ delay: .1 })
+      .from('.svh .crumb, .svh__b1, .svh__b2', { y: 34, opacity: 0, duration: 1, ease: EASE, stagger: .1, clearProps: 'opacity,transform' }, 0)
+      .fromTo('.svh__h mark', { '--mk': 0 }, { '--mk': 1, duration: .7, ease: EASE }, .55)
+      .to(o, { p: 1, duration: 1.2, ease: 'expo.inOut', onUpdate: function () { img.style.clipPath = poly(o.p); }, onComplete: function () { img.style.clipPath = ''; } }, .2)
+      .to(img, { scale: 1, duration: 1.5, ease: EASE }, .2)
+      .from('.svh__copy > *', { y: 20, opacity: 0, duration: .9, ease: EASE, stagger: .08, clearProps: 'opacity,transform' }, .4);
+    G.from(ps, { y: 60, opacity: 0, duration: 1.1, ease: EASE, stagger: .1, scrollTrigger: { trigger: '.w3', start: 'top 80%', once: true }, clearProps: 'opacity,transform' });
+    G.from('.less__list li', { y: 30, opacity: 0, duration: 1, ease: EASE, stagger: .12, scrollTrigger: { trigger: '.less__list', start: 'top 82%', once: true } });
+    reveal($('.mgx__img img'));
+    G.from('.mgx__list li', { x: 30, opacity: 0, duration: .9, ease: EASE, stagger: .1, scrollTrigger: { trigger: '.mgx__list', start: 'top 85%', once: true } });
+  })();
+
+  /* ---------------- ports: line-up hero; the port ledger takes focus row by row; the JNPA rail draws to 2027 ---------------- */
+  (function ports() {
+    var hero = $('.ph'); if (!hero) return;
+    var rows = $$('.pa__row');
+    // the ledger: the row nearest the middle of the screen is the one in focus
+    if (rows.length) {
+      var focus = function (i) { rows.forEach(function (r, k) { r.classList.toggle('is-on', k === i); }); };
+      if (ST && !reduce) rows.forEach(function (r, i) { ST.create({ trigger: r, start: 'top 62%', end: 'bottom 62%', onToggle: function (st) { if (st.isActive) focus(i); } }); });
+      else rows.forEach(function (r) { r.classList.add('is-on'); });
+    }
+    if (!anim) return;
+    var img = $('.ph__img'), wide = w.matchMedia('(min-width:1001px)').matches;
+    G.timeline({ delay: .15 })
+      .from('.ph .crumb', { y: 14, opacity: 0, duration: .7, ease: EASE, clearProps: 'opacity,transform' }, 0)
+      .from('.ph__l > span', { yPercent: 115, skewX: -27.5, duration: 1.15, ease: EASE, stagger: .14 }, .05)
+      .from('.ph__sub, .ph__ctas', { y: 20, opacity: 0, duration: .9, ease: EASE, stagger: .08, clearProps: 'opacity,transform' }, .6)
+      .fromTo(img, { scale: 1.2 }, { scale: wide ? 1.05 : 1, duration: 2.4, ease: EASE }, 0);
+    if (wide) {
+      var qx = G.quickTo(img, 'x', { duration: 1, ease: 'power3' }), qy = G.quickTo(img, 'y', { duration: 1, ease: 'power3' });
+      hero.addEventListener('pointermove', function (ev) { var r = hero.getBoundingClientRect(); qx(((ev.clientX - r.left) / r.width - .5) * -24); qy(((ev.clientY - r.top) / r.height - .5) * -14); });
+      G.to('.ph__bg', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+    }
+    // JNPA: the rail draws up to today, the milestones arrive in order, then the scale bar fills
+    var rail = $('.jp__rail');
+    if (rail) {
+      var pr = { v: 0 }, setRail = function () { rail.style.setProperty('--railk', pr.v); };
+      rail.classList.add('is-anim'); setRail();
+      var jt = G.timeline({ paused: true })
+        .to(pr, { v: 1, duration: 1.6, ease: 'power2.inOut', onUpdate: setRail }, 0)
+        .from('.jp__s', { y: 24, opacity: 0, duration: .9, ease: EASE, stagger: .14, clearProps: 'opacity,transform' }, .1);
+      ST.create({ trigger: rail, start: 'top 80%', once: true, onEnter: function () { jt.play(); } });
+    }
+    var fill = $('.jp__fill');
+    if (fill) G.from(fill, { scaleX: 0, duration: 1.8, ease: 'power2.out', scrollTrigger: { trigger: '.jp__bar', start: 'top 85%', once: true } });
+    reveal($('.jp__img img'));
+  })();
+
+  /* ---------------- careers ---------------- */
+  (function careers() {
+    if (!$('.jnh')) return;
+    // hero: the giant lines arrive on the slant and the window opens onto the truck at dusk, then it holds.
+    // On wide screens scrolling holds the hero: the window opens to full bleed, the lines part, beat two takes the frame.
+    var hero = $('.jnh'), win = $('.jnh__win'), himg = $('.jnh__img');
+    var wideH = w.matchMedia('(min-width:1001px)').matches;
+    if (anim && win && himg) {
+      var TANH = Math.tan(27.5 * Math.PI / 180), gw = { o: 0, e: 0 };
+      var paintWin = function () {
+        var W = hero.offsetWidth, H = hero.offsetHeight, t = H * .21, b = H * .64, k = (b - t) * TANH, e = gw.e;
+        var xl = W * .34, xr = xl + (W * .84 - xl) * gw.o;
+        var L = function (a, z) { return (a + (z - a) * e).toFixed(1) + 'px'; };
+        win.style.clipPath = 'polygon(' + L(xl, 0) + ' ' + L(t, 0) + ',' + L(xr, W) + ' ' + L(t, 0) + ',' + L(xr - k, W) + ' ' + L(b, H) + ',' + L(xl - k, 0) + ' ' + L(b, H) + ')';
+      };
+      var openStep = wideH ? paintWin : function () { win.style.clipPath = poly(gw.o); };
+      openStep(); if (wideH) w.addEventListener('resize', paintWin);
+      if (wideH) G.set(himg, { yPercent: -36 }); // the truck sits in the window; it settles as the window opens
+      var chars = w.SplitText ? new w.SplitText('.jnh__l > span', { type: 'chars' }).chars : $$('.jnh__l > span');
+      G.set('.jnh__b2 mark', { '--mk': 0 });
+      G.set(chars, { yPercent: 118, skewX: -27.5 });
+      G.set('.jnh__b2 > span', { yPercent: 60, opacity: 0 });
+      G.set('.jnh__now', { y: 30, opacity: 0 });
+      G.set('.jnh__now li', { x: -20, opacity: 0 });
+      G.timeline({ delay: .15 })
+        .to(chars, { yPercent: 0, skewX: 0, duration: 1.1, ease: EASE, stagger: .022 }, 0)
+        .to(gw, { o: 1, duration: 1.4, ease: 'expo.inOut', onUpdate: openStep, onComplete: function () { if (!wideH) win.style.clipPath = ''; } }, .25)
+        .fromTo(himg, { scale: 1.4 }, { scale: wideH ? 1.14 : 1, duration: 2, ease: EASE }, .25)
+        .to('.jnh__b2 > span', { yPercent: 0, opacity: 1, duration: 1, ease: EASE, clearProps: 'opacity,transform' }, .85)
+        .to('.jnh__b2 mark', { '--mk': 1, duration: .7, ease: EASE }, 1.3)
+        .to('.jnh__now', { y: 0, opacity: 1, duration: .9, ease: EASE, clearProps: 'opacity,transform' }, 1)
+        .to('.jnh__now li', { x: 0, opacity: 1, duration: .8, ease: EASE, stagger: .07, clearProps: 'opacity,transform' }, 1.1);
+      if (wideH) {
+        // the picture leans away from the pointer a little
+        var qx = G.quickTo(himg, 'x', { duration: 1, ease: 'power3' }), qy = G.quickTo(himg, 'y', { duration: 1, ease: 'power3' });
+        hero.addEventListener('pointermove', function (ev) { var r = hero.getBoundingClientRect(); qx(((ev.clientX - r.left) / r.width - .5) * -28); qy(((ev.clientY - r.top) / r.height - .5) * -18); });
+        G.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: '+=90%', pin: true, scrub: .6, refreshPriority: 1, invalidateOnRefresh: true } })
+          .to(gw, { e: 1, ease: 'none', onUpdate: paintWin }, 0)
+          .to(himg, { scale: 1, yPercent: 0, ease: 'none' }, 0)
+          .to('.jnh__l--1', { xPercent: -45, opacity: 0, ease: 'none' }, 0)
+          .to('.jnh__l--2', { xPercent: 45, opacity: 0, ease: 'none' }, 0)
+          .to('.jnh__shade', { opacity: 1, ease: 'none' }, .2)
+          .to('.jnh__b2', { scale: 1.75, y: function () { return -hero.offsetHeight * .3; }, ease: 'none' }, .15);
+      }
+    }
+
+    // plant to highway: on wide screens the track pins and scrolls sideways; the bar marks the stop in view
+    var pin = $('.jnj__pin'), track = $('.jnj__track'), steps = $$('.jnj__prog li'), stops = $$('.jnp');
+    function mark(i) { steps.forEach(function (s, k) { s.classList.toggle('is-on', k === i); s.classList.toggle('is-past', k < i); }); }
+    mark(0);
+    var wide = w.matchMedia('(min-width:1001px)').matches;
+    if (anim && wide && pin && track) {
+      pin.classList.add('is-pin');
+      var dist = function () { return Math.max(0, track.scrollWidth - pin.clientWidth); };
+      G.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: {
+        trigger: pin, start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: .6, invalidateOnRefresh: true,
+        onUpdate: function (st) { mark(Math.min(stops.length - 1, Math.round(st.progress * (stops.length - 1)))); } } });
+    } else if (track) {
+      track.addEventListener('scroll', function () { var wd = stops[0] ? stops[0].offsetWidth : 1; mark(Math.min(stops.length - 1, Math.round(track.scrollLeft / wd))); }, { passive: true });
+    }
+
+    if (!anim) return;
+
+    // scale: the number counts up once
+    var n = $('.jns__n');
+    if (n) {
+      var c = { v: 0 }; n.textContent = '0+';
+      ST.create({ trigger: n, start: 'top 85%', once: true, onEnter: function () {
+        G.to(c, { v: 2000, duration: 2.2, ease: 'power3.out', onUpdate: function () { n.textContent = Math.round(c.v).toLocaleString('en-IN') + '+'; } });
+      } });
+      G.from('.jns__t, .jns__side > *', { y: 30, opacity: 0, duration: 1, ease: EASE, stagger: .1, scrollTrigger: { trigger: '.jns', start: 'top 70%', once: true }, clearProps: 'opacity,transform' });
+    }
+
+    // life at EIM: the tiles fly in from scattered, tilted places and lock into the mosaic as the section arrives
+    var tiles = $$('.jnl__t');
+    if (tiles.length) {
+      var spread = [[-90, 60, -5], [70, -40, 4], [120, 30, 6], [60, 80, -4], [-110, 50, 5], [30, 110, -3], [100, -60, 4]];
+      var ltl = G.timeline({ scrollTrigger: { trigger: '.jnl__grid', start: 'top 92%', end: 'top 30%', scrub: .8 } });
+      tiles.forEach(function (t, i) {
+        var v = spread[i % spread.length];
+        ltl.fromTo(t, { x: v[0], y: v[1] + 60, rotation: v[2], scale: .84, opacity: 0 }, { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, ease: 'power2.out', duration: 1 }, i * .08);
+      });
+    }
+
+    // awards: the cards rise in order, each picture settling from a little larger
+    G.from('.jna__c', { y: 70, opacity: 0, duration: 1.1, ease: EASE, stagger: .12, scrollTrigger: { trigger: '.jna__row', start: 'top 85%', once: true }, clearProps: 'opacity,transform' });
+    $$('.jna__img').forEach(function (fr) { reveal(fr, fr.closest('.jna__c')); });
+
+    // open roles rise in order
+    G.from('.jnr__row', { y: 34, opacity: 0, duration: 1, ease: EASE, stagger: .1, scrollTrigger: { trigger: '.jnr__list', start: 'top 85%', once: true }, clearProps: 'opacity,transform' });
+  })();
+
   w.addEventListener('load', function () { if (ST) ST.refresh(); });
+  requestAnimationFrame(function () {
+    root.classList.remove('is-pre');
+  });
 })();

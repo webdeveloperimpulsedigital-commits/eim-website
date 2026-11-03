@@ -45,7 +45,9 @@ export default defineConfig({
         newsroom: resolve(__dirname, 'newsroom/index.html'),
         about: resolve(__dirname, 'about/index.html'),
         contact: resolve(__dirname, 'contact-us/index.html'),
-        leadership: resolve(__dirname, 'leadership/index.html')
+        leadership: resolve(__dirname, 'leadership/index.html'),
+        service: resolve(__dirname, 'solutions/after-sales-service/index.html'),
+        careers: resolve(__dirname, 'careers/index.html')
       }
     }
   }

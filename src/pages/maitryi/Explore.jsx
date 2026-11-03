@@ -7,7 +7,7 @@ const ITEMS = [
   { t: 'ASHWA e-tractor', d: 'The 55-tonne battery-swappable prime mover.', href: PAGES.ashwa, img: 'assets/img/mai/m-ashwa.webp' },
   { t: 'Swapping and charging', d: 'A swap in under 7 minutes, and CCS2 fast charging for any brand.', href: PAGES.swap, img: 'assets/img/mai/m-swap.webp' },
   { t: 'Network', d: 'Swap stations existing, upcoming and planned across India.', href: PAGES.swap + '#network', img: 'assets/img/station-sky.webp' },
-  { t: 'After-sales service', d: 'Service teams, mobile vans and workshops, 24x7.', href: PAGES.ashwa + '#service', img: 'assets/img/truck-hall.webp' },
+  { t: 'After-sales service', d: 'Service teams, mobile vans and workshops, 24x7.', href: PAGES.service, img: 'assets/img/svc/sv-van.webp' },
 ];
 
 export default function Explore() {

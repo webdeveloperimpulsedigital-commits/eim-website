@@ -31,25 +31,21 @@ export default function Footer({ isContactPage }) {
             <a href={url(PAGES.maitryi)}>Maitryi model</a>
             <a href={url(PAGES.ashwa)}>ASHWA e-tractor</a>
             <a href={url(PAGES.swap)}>Swapping and charging</a>
-            <a href={url(PAGES.ashwa + '#service')}>After-sales service</a>
+            <a href={url(PAGES.service)}>After-sales service</a>
           </div>
           <div>
             <h4>Industries</h4>
             <a href={url(PAGES.ports)}>Ports and container terminals</a>
-            <a href={url('#industries')}>Logistics and middle-mile</a>
-            <a href={url('#industries')}>Cement, steel and mining</a>
           </div>
           <div>
             <h4>Company</h4>
             <a href={url(PAGES.about)}>About EIM</a>
             <a href={url(PAGES.leadership)}>Leadership</a>
-            <a href={url('#backers')}>Shareholders and partners</a>
             <a href={url(PAGES.newsroom)}>Newsroom</a>
           </div>
           <div>
             <h4>Get in touch</h4>
-            <a href={sectionOf(PAGES.swap, '#network')}>Network</a>
-            <a href={url('#careers')}>Careers</a>
+            <a href={url(PAGES.careers)}>Careers</a>
             <a href={contactHref} onClick={handleContactClick}>Contact</a>
             <a href={contactHref} onClick={handleContactClick}>Assess your fleet</a>
           </div>

@@ -63,7 +63,7 @@ export default function App() {
   useEffect(() => {
     if (currentPage !== 'home') return;
 
-    const scriptUrls = [
+    const vendorScripts = [
       'assets/vendor/gsap.min.js',
       'assets/vendor/ScrollTrigger.min.js',
       'assets/vendor/SplitText.min.js',
@@ -72,19 +72,35 @@ export default function App() {
       'assets/vendor/CustomEase.min.js',
       'assets/vendor/motion.js',
       'assets/vendor/lenis.min.js',
-      'assets/js/main.js',
     ];
 
     let isCancelled = false;
 
-    const loadScriptsSequentially = async () => {
-      for (const p of scriptUrls) {
-        if (isCancelled) break;
-        const src = url(p);
-        if (document.querySelector(`script[src="${src}"]`)) continue;
+    const loadParallel = (scripts) =>
+      Promise.all(
+        scripts.map(
+          (p) =>
+            new Promise((resolve) => {
+              const src = url(p);
+              if (document.querySelector(`script[src="${src}"]`)) return resolve();
+              const script = document.createElement('script');
+              script.src = src;
+              script.async = false;
+              script.onload = resolve;
+              script.onerror = resolve;
+              document.head.appendChild(script);
+            })
+        )
+      );
+
+    const loadScripts = async () => {
+      await loadParallel(vendorScripts);
+      if (isCancelled) return;
+      const mainSrc = url('assets/js/main.js');
+      if (!document.querySelector(`script[src="${mainSrc}"]`)) {
         await new Promise((resolve) => {
           const script = document.createElement('script');
-          script.src = src;
+          script.src = mainSrc;
           script.async = false;
           script.onload = resolve;
           script.onerror = resolve;
@@ -93,7 +109,7 @@ export default function App() {
       }
     };
 
-    loadScriptsSequentially();
+    loadScripts();
 
     return () => {
       isCancelled = true;

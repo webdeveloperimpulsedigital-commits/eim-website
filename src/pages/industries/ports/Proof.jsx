@@ -50,14 +50,14 @@ export default function Proof() {
           <figure className="quote">
             <figcaption>
               <img src={url('assets/img/t-vitthal.webp')} alt="" width="56" height="56" loading="lazy" />
-              <span><b>Vitthal Wable</b>Director, Radiance Green Mobility and Jyothi Transport &amp; Freight Services</span>
+              <span><b>Vitthal Wable</b>Director, Radiance Green Mobility Pvt. Ltd., Jyothi Transport &amp; Freight Services Pvt. Ltd.</span>
             </figcaption>
-            <blockquote>&ldquo;As one of the early users of EIM vehicles at JNPT Port at Navi Mumbai, I&rsquo;m amazed at the way EIM has created the charging infra in the JNPT eco-system&hellip; in terms of speed &amp; scale.&rdquo;</blockquote>
+            <blockquote>&ldquo;As one of the early users of EIM vehicles at JNPT Port at Navi Mumbai, I&rsquo;m amazed at the way EIM has created the charging infra in the JNPT eco-system comprising of multiple Swapping-cum-Charging stations - in terms of speed &amp; scale. Looking at current oil prices, I feel lucky I switched to EV early.&rdquo;</blockquote>
           </figure>
           <div className="pproof__logos">
             <p className="reg__h">Port authorities and terminal operators among our customers</p>
             <ul>
-              {[['dpa', 'Deendayal Port Authority, Kandla', 64], ['vocpa', 'V.O. Chidambaranar Port Authority, Tuticorin', 66], ['vpa', 'Visakhapatnam Port Authority', 80], ['jmbaxi', 'J M Baxi', 48]].map(([k, alt, h]) => (
+              {[['dpa', 'Deendayal Port Authority, Kandla', 64], ['vocpa', 'Tuticorin Port Trust', 66], ['vpa', 'Visakhapatnam Port Authority', 80], ['jmbaxi', 'J M Baxi', 48]].map(([k, alt, h]) => (
                 <li key={k}><img src={url('assets/brands/' + k + '.webp')} alt={alt} style={{ '--h': h + 'px' }} loading="lazy" /></li>
               ))}
             </ul>

@@ -25,7 +25,7 @@ export default function AshwaPage() {
       <a className="skip" href="#main">
         Skip to content
       </a>
-      <Header current="solutions" />
+      <Header current="solutions" onDark />
       <main id="main">
         <Hero />
         <Explore />

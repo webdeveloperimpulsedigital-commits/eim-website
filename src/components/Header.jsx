@@ -212,14 +212,14 @@ export default function Header({ current, onDark = false, isContactPage }) {
                   Industries <svg><use href="#chev" /></svg>
                 </button>
               </li>
-              <li className={cur('network')}><a className="nav__btn" href={NETWORK}>Network</a></li>
               <li className={cur('newsroom')}><a className="nav__btn" href={url(PAGES.newsroom)}>Newsroom</a></li>
               <li className={cur('company')} data-mega="company">
                 <button className="nav__btn" aria-expanded="false" aria-controls="mega-company">
                   Company <svg><use href="#chev" /></svg>
                 </button>
               </li>
-              <li className={cur('careers')}><a className="nav__btn" href={url('#careers')}>Careers</a></li>
+              <li className={cur('careers')}><a className="nav__btn" href={url(PAGES.careers)}>Careers</a></li>
+              <li className={cur('contact')}><a className="nav__btn" href={contactHref} onClick={handleContactClick}>Contact</a></li>
             </ul>
           </nav>
           <div className="hdr__right">
@@ -243,7 +243,7 @@ export default function Header({ current, onDark = false, isContactPage }) {
               <li><a href={url(PAGES.maitryi)}><b>Maitryi model</b><span>You own the truck. We own and run the battery.</span></a></li>
               <li><a href={url(PAGES.ashwa)}><b>ASHWA e-tractor</b><span>55-tonne battery-swappable prime mover.</span></a></li>
               <li><a href={url(PAGES.swap)}><b>Swapping and charging</b><span>A swap in under 7 minutes. CCS2 charging for any brand.</span></a></li>
-              <li><a href={url(PAGES.ashwa + '#service')}><b>After-sales service</b><span>Service teams, mobile vans and workshops.</span></a></li>
+              <li><a href={url(PAGES.service)}><b>After-sales service</b><span>Service teams, mobile vans and workshops.</span></a></li>
             </ul>
             <div className="mega__card"><img src={url('assets/img/bay-real.webp')} alt="" loading="lazy" /></div>
           </div>
@@ -256,8 +256,6 @@ export default function Header({ current, onDark = false, isContactPage }) {
             </div>
             <ul className="mega__grid">
               <li><a href={PORTS}><b>Ports and container terminals</b><span>Yard moves, CFS and ICD shuttles.</span></a></li>
-              <li><a href={url('#industries')}><b>Logistics and middle-mile</b><span>Fixed lanes between hubs.</span></a></li>
-              <li><a href={url('#industries')}><b>Cement, steel and mining</b><span>Clinker, coal and bulk haulage.</span></a></li>
             </ul>
             <div className="mega__card"><img src={url('assets/img/hapag.webp')} alt="" loading="lazy" /></div>
           </div>
@@ -271,12 +269,6 @@ export default function Header({ current, onDark = false, isContactPage }) {
             <ul className="mega__grid">
               <li><a href={url(PAGES.about)}><b>About EIM</b><span>What we're building and why.</span></a></li>
               <li><a href={url(PAGES.leadership)}><b>Leadership</b><span>The team running EIM.</span></a></li>
-              <li><a href={url('#backers')}><b>Shareholders and partners</b><span>Ravindra Energy, J M Baxi, Foton.</span></a></li>
-              <li>
-                <a href={contactHref} onClick={handleContactClick}>
-                  <b>Contact</b><span>Offices in Mumbai, Noida, Pune and Nhava Sheva.</span>
-                </a>
-              </li>
             </ul>
             <div className="mega__card"><img src={url('assets/img/people.webp')} alt="" loading="lazy" /></div>
           </div>
@@ -287,17 +279,17 @@ export default function Header({ current, onDark = false, isContactPage }) {
       <div className="mnav" id="mnav" hidden>
         <div className="mnav__in">
           <details><summary>Solutions</summary>
-            <a href={url(PAGES.maitryi)}>Maitryi model</a><a href={url(PAGES.ashwa)}>ASHWA e-tractor</a><a href={url(PAGES.swap)}>Swapping and charging</a><a href={url(PAGES.ashwa + '#service')}>After-sales service</a>
+            <a href={url(PAGES.maitryi)}>Maitryi model</a><a href={url(PAGES.ashwa)}>ASHWA e-tractor</a><a href={url(PAGES.swap)}>Swapping and charging</a><a href={url(PAGES.service)}>After-sales service</a>
           </details>
           <details><summary>Industries</summary>
-            <a href={PORTS}>Ports and container terminals</a><a href={url('#industries')}>Logistics and middle-mile</a><a href={url('#industries')}>Cement, steel and mining</a>
+            <a href={PORTS}>Ports and container terminals</a>
           </details>
-          <a className="mnav__top" href={NETWORK}>Network</a>
           <a className="mnav__top" href={url(PAGES.newsroom)}>Newsroom</a>
           <details><summary>Company</summary>
-            <a href={url(PAGES.about)}>About EIM</a><a href={url(PAGES.leadership)}>Leadership</a><a href={url('#backers')}>Shareholders and partners</a><a href={contactHref} onClick={handleContactClick}>Contact</a>
+            <a href={url(PAGES.about)}>About EIM</a><a href={url(PAGES.leadership)}>Leadership</a>
           </details>
-          <a className="mnav__top" href={url('#careers')}>Careers</a>
+          <a className="mnav__top" href={url(PAGES.careers)}>Careers</a>
+          <a className="mnav__top" href={contactHref} onClick={handleContactClick}>Contact</a>
           <a className="btn btn--teal" href={contactHref} onClick={handleContactClick}><span>Assess your fleet</span></a>
           <a className="mnav__mail" href="mailto:powerup@energyinmotion.in">powerup@energyinmotion.in</a>
         </div>

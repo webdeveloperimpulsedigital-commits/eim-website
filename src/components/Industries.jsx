@@ -1,4 +1,5 @@
 import React from 'react';
+import { url, PAGES } from '../paths';
 
 export default function Industries() {
   return (
@@ -9,7 +10,7 @@ export default function Industries() {
           <p className="lede">EIM works best on heavy, repeat routes where a truck runs all day and every hour parked is money lost.</p>
         </div>
         <div className="cards">
-          <a className="card" href="#assess" data-intent="fleet">
+          <a className="card" href={url(PAGES.ports)}>
             <figure><img src="assets/img/hapag.webp" alt="EIM trucks hauling containers at a port" loading="lazy" /></figure>
             <div className="card__txt">
               <h3>Ports and container terminals</h3>
@@ -17,30 +18,27 @@ export default function Industries() {
               <span className="card__go">Electrify port operations <svg><use href="#arrow" /></svg></span>
             </div>
           </a>
-          <a className="card" href="#assess" data-intent="fleet">
+          <div className="card">
             <figure><img src="assets/img/fleet-row.webp" alt="A row of EIM ASHWA e-tractors" loading="lazy" /></figure>
             <div className="card__txt">
               <h3>Logistics and middle-mile</h3>
               <p>Fixed lanes between terminals, CFSs, ICDs and warehouses, where swaps slot into the route instead of stopping it.</p>
-              <span className="card__go">Plan a lane <svg><use href="#arrow" /></svg></span>
             </div>
-          </a>
-          <a className="card" href="#assess" data-intent="fleet">
+          </div>
+          <div className="card">
             <figure><img src="assets/img/ev-ultratech.webp" alt="EIM trucks at the UltraTech deployment" loading="lazy" /></figure>
             <div className="card__txt">
               <h3>Cement, steel and mining</h3>
               <p>UltraTech has deployed 45 EIM electric trucks in North India.</p>
-              <span className="card__go">Move bulk loads <svg><use href="#arrow" /></svg></span>
             </div>
-          </a>
-          <a className="card" href="#network">
+          </div>
+          <div className="card">
             <figure><img src="assets/img/dusk.webp" alt="EIM truck at a port terminal at dusk" loading="lazy" /></figure>
             <div className="card__txt">
               <h3>Industrial freight corridors</h3>
               <p>Delhi–Jaipur, Jaipur–Mumbai and more corridors are being built out, one station at a time.</p>
-              <span className="card__go">See the corridors <svg><use href="#arrow" /></svg></span>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </section>

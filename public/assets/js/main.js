@@ -872,4 +872,9 @@
   })();
 
   w.addEventListener('load', function () { ST.refresh(); });
+  if ($('#heroPin')) {
+    requestAnimationFrame(function () {
+      root.classList.remove('is-pre');
+    });
+  }
 })();
